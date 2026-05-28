@@ -173,13 +173,10 @@ void sumArraysOnHost(float *A, float *B, float *C, const int N)
 //Refer sumArraysOnGPU-timer.cu and write your kernel function to perform parallel addition
 __global__ void sumArraysOnGPU(float *A, float *B, float *C, const int N)
 {
-    int i = (blockIdx.x * blockDim.x + threadIdx.x) * 2;
+    int i = blockIdx.x * blockDim.x + threadIdx.x;
 
     if (i < N)
         C[i] = A[i] + B[i];
-
-    if (i + 1 < N)
-        C[i + 1] = A[i + 1] + B[i + 1];
 }
 
 
